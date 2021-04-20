@@ -1,2 +1,2 @@
 # Mesa-RPG-Online
-Projeto de uma mesa online de RPG com diversos jogadores e apenas um mestre
+Esse projeto tem como intuito criar um aplicativo desenvolvido em Java que inicialmente será lançado apenas para PC, e seu objetivo será simular uma mesa de RPG totalmente online. Para isso, serão utilizados diversos tipos de classes para criar o front e o back-end. O projeto guardará os dados dos jogadores e do mestre, e irá fazer com que, quando conectados, possam interagir entre si. O projeto ainda está no inicio, e deverá demorar para ser concluído. O projeto deverá ser portado para mobile depois que a versão de PC estiver concluída.
