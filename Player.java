@@ -1,6 +1,7 @@
 //libraries
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Player
 {
@@ -37,7 +38,6 @@ public class Player
     11 - Paladin
     12 - Ranger
     */
-
     public void showClassMenu()
     {
         System.out.println("What class is your character? Enter the number corresponding to your class");
@@ -137,127 +137,59 @@ public class Player
         Random dice = new Random();
         Scanner sc = new Scanner(System.in);
         race.setRace();
-        int option;
+        int option = 1;
         if(setupOption == 0)
         {
             System.out.println("You have 6 values to allocate:");
             System.out.println("15 14 13 12 10 8");
-            Integer dataValues[] = new Integer[6];
+            Integer dataValues[] = {15, 14, 13, 12, 10, 8};
+            int alreadyUsed[] = {0,0,0,0,0,0};
+            ArrayList<String> options = new ArrayList<String>(); 
 
-            dataValues[0] = 15;
-            dataValues[1] = 14;
-            dataValues[2] = 13;
-            dataValues[3] = 12;
-            dataValues[4] = 10;
-            dataValues[5] = 8;
+            options.add("1 - Strength");
+            options.add("2 - Dexterity");
+            options.add("3 - Constituion");
+            options.add("4 - Intelligence");
+            options.add("5 - Wisdom");
+            options.add("6 - Charisma");
+            System.out.println("Tamanho options: " + options.size());
             
-            int counter = 0;
-            while(counter < 6)
+            for(int counter = 0; counter<6; counter++)
             {
-                System.out.println("Wich atribute do you want to put the " + dataValues[counter].toString() + " value?");
-                System.out.println("1 - Strength");
-                System.out.println("2 - Dexterity");
-                System.out.println("3 - Constitution");
-                System.out.println("4 - Intelligence");
-                System.out.println("5 - Wisdom");
-                System.out.println("6 - Charisma");
-                option = sc.nextInt();
-                while(option < 1 || option > 6)
+                System.out.println("where do you wanna use the " + dataValues[counter].toString() + "?");
+                
+                for(int i = 0; i<options.size(); i++)
                 {
-                    System.out.println("Enter a valid number!");
+                    System.out.println(options.get(i));
+                }
+                option = sc.nextInt();
+
+                while(option < 1 || alreadyUsed[option-1] == 1)
+                {
+                    System.out.println("Enter a valid number or a number that hasnt been used!");
                     option = sc.nextInt();
                 }
-                if(counter == 0)
+
+                this.status[option-1] = dataValues[counter];
+                alreadyUsed[option-1] = 1;
+                char index;
+                
+                for(int i = 0; i<options.size(); i++)
                 {
-                    if(option == 1)
-                        this.status[0] = 15;
-                    if(option == 2)
-                        this.status[1] = 15;
-                    if(option == 3)
-                        this.status[2] = 15;
-                    if(option == 4)
-                        this.status[3] = 15;
-                    if(option == 5)
-                        this.status[4] = 15;
-                    if(option == 6)
-                        this.status[5] = 15;
+                    String aux = options.get(i);
+                    index = aux.charAt(0);
+
+                    if(Character.getNumericValue(index) == option)
+                    {
+                        if(i == options.size())
+                        {
+                            options.remove(i-1);
+                        }else{
+                            options.remove(i);
+                        }
+                        break;
+                    }
                 }
-                if(counter == 1)
-                {
-                    if(option == 1)
-                        this.status[0] = 14;
-                    if(option == 2)
-                        this.status[1] = 14;
-                    if(option == 3)
-                        this.status[2] = 14;
-                    if(option == 4)
-                        this.status[3] = 14;
-                    if(option == 5)
-                        this.status[4] = 14;
-                    if(option == 6)
-                        this.status[5] = 14;
-                }
-                if(counter == 2)
-                {
-                    if(option == 1)
-                        this.status[0] = 13;
-                    if(option == 2)
-                        this.status[1] = 13;
-                    if(option == 3)
-                        this.status[2] = 13;
-                    if(option == 4)
-                        this.status[3] = 13;
-                    if(option == 5)
-                        this.status[4] = 13;
-                    if(option == 6)
-                        this.status[5] = 13;
-                }
-                if(counter == 3)
-                {
-                    if(option == 1)
-                        this.status[0] = 12;
-                    if(option == 2)
-                        this.status[1] = 12;
-                    if(option == 3)
-                        this.status[2] = 12;
-                    if(option == 4)
-                        this.status[3] = 12;
-                    if(option == 5)
-                        this.status[4] = 12;
-                    if(option == 6)
-                        this.status[5] = 12;
-                }
-                if(counter == 4)
-                {
-                    if(option == 1)
-                        this.status[0] = 10;
-                    if(option == 2)
-                        this.status[1] = 10;
-                    if(option == 3)
-                        this.status[2] = 10;
-                    if(option == 4)
-                        this.status[3] = 10;
-                    if(option == 5)
-                        this.status[4] = 10;
-                    if(option == 6)
-                        this.status[5] = 10;
-                }
-                if(counter == 5)
-                {
-                    if(option == 1)
-                        this.status[0] = 8;
-                    if(option == 2)
-                        this.status[1] = 8;
-                    if(option == 3)
-                        this.status[2] = 8;
-                    if(option == 4)
-                        this.status[3] = 8;
-                    if(option == 5)
-                        this.status[4] = 8;
-                    if(option == 6)
-                        this.status[5] = 8;
-                }
-                counter++;
             }
         }
         if(setupOption == 1)
@@ -265,16 +197,17 @@ public class Player
             for(int counter = 0; counter < 6; counter++)
             {
                 int d6[] = new int[4];
-                int sum;
                 d6[0] = dice.nextInt(6)+1;
                 d6[1] = dice.nextInt(6)+1;
                 d6[2] = dice.nextInt(6)+1;
                 d6[3] = dice.nextInt(6)+1;
                 for(int dcounter = 0; dcounter<4; dcounter++)
                 {
-                    if(d6[dcounter+1]>=d6[dcounter])
-                    {
-                        d6[dcounter] = d6[dcounter+1];
+                    if(dcounter != 3){
+                        if(d6[dcounter+1]>=d6[dcounter])
+                        {
+                            d6[dcounter] = d6[dcounter+1];
+                        }
                     }
                 }
                 this.status[counter] = d6[0] + d6[1] + d6[2];
@@ -287,9 +220,9 @@ public class Player
         for(int counter = 0; counter<6; counter++)
         {
             this.modifiers[counter] = (double) (this.status[counter] - 10)/2;
-            if(this.status[counter]%2 != 0)
+            if((this.status[counter] -10) % 2 != 0)
             {
-                this.modifiers[counter] = (double) ((this.status[counter] - 10)/2) - 0.5;
+                this.modifiers[counter] = (double) ((this.status[counter] - 10)/2);
             }
         }
         System.out.println("Your Strength Value: " + this.status[0]);
@@ -304,6 +237,7 @@ public class Player
         System.out.println("Modifier: " + this.modifiers[4]);
         System.out.println("Your Charisma Value: " + this.status[5]);
         System.out.println("Modifier: " + this.modifiers[5]);
+        sc.close();
     }
     public void setMaxHpLV1()
     {
@@ -387,6 +321,7 @@ public class Player
         setMaxHpLV1();
         currentHP = maxHP;
         xp = 0;
+        sc.close();
         return true;
     }
 }
